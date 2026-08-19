@@ -1,0 +1,33 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"workspaceName": {
+			"value": "synapseexplorer"
+		},
+		"ls__SynapseServerless_password": {
+			"value": ""
+		},
+		"ls_deltalake_accountKey": {
+			"value": ""
+		},
+		"synapseexplorer-WorkspaceDefaultSqlServer_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:synapseexplorer.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}"
+		},
+		"ls__SynapseServerless_properties_typeProperties_server": {
+			"value": "synapseexplorer-ondemand.sql.azuresynapse.net"
+		},
+		"ls__SynapseServerless_properties_typeProperties_database": {
+			"value": "SalesDWH"
+		},
+		"ls__SynapseServerless_properties_typeProperties_userName": {
+			"value": "adminroshan"
+		},
+		"ls_deltalake_properties_typeProperties_url": {
+			"value": "https://azurefundaroshanstorage.dfs.core.windows.net/"
+		},
+		"synapseexplorer-WorkspaceDefaultStorage_properties_typeProperties_url": {
+			"value": "https://azurefundaroshanstorage.dfs.core.windows.net"
+		}
+	}
+}
