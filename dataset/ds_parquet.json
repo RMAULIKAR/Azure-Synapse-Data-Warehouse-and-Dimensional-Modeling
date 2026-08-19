@@ -1,0 +1,22 @@
+{
+	"name": "ds_parquet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_deltalake",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "orderDay1.parquet",
+				"folderPath": "bronze/sales",
+				"fileSystem": "dwhsynpse"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

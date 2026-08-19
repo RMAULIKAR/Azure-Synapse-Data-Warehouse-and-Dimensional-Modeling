@@ -1,0 +1,17 @@
+{
+	"name": "1_Ext_Resources",
+	"properties": {
+		"content": {
+			"query": "CREATE MASTER KEY ENCRYPTION BY PASSWORD ='Microsoftpassword@123';\n\n\n--------------------------------\n-- DATABASE SCOPED CREDENTIAL\n--------------------------------\n\nCREATE DATABASE SCOPED CREDENTIAL roshan_creds\nWITH IDENTITY = 'Managed Identity';\n\n\n-- -----------------------\n-- -- EXTERNAL DATA SOURCE\n-- -----------------------\n-- DROP EXTERNAL DATA SOURCE silver_source\nCREATE EXTERNAL DATA SOURCE silver_source\nWITH\n(\n    LOCATION = 'https://azurefundaroshanstorage.blob.core.windows.net/dwhsynpse/silver/',\n    CREDENTIAL = roshan_creds \n);\n\n\nCREATE EXTERNAL DATA SOURCE gold_source\nWITH\n(\n    LOCATION = 'https://azurefundaroshanstorage.blob.core.windows.net/dwhsynpse/gold/',\n    CREDENTIAL = roshan_creds\n);\n\n-----------------------\n-- EXTERNAL FILE FORMAT\n-----------------------\n\nCREATE EXTERNAL FILE FORMAT parquet\nWITH\n(\n    FORMAT_TYPE = PARQUET,\n    DATA_COMPRESSION = 'org.apache.hadoop.io.compress.SnappyCodec'\n);\n\nCREATE EXTERNAL FILE FORMAT delta\nWITH\n(\n    FORMAT_TYPE = DELTA\n);\n\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "SalesDWH",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

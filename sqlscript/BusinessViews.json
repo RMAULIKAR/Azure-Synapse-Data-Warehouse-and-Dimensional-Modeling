@@ -1,0 +1,17 @@
+{
+	"name": "BusinessViews",
+	"properties": {
+		"content": {
+			"query": "-----------------------------------------------\n---1. Sales Performance View\n-----------------------------------------------\n\nCREATE VIEW gold.vw_SalesPerformance\nAS\nSELECT\n    COUNT(DISTINCT F.DimOrdersKey) AS TotalOrders,\n    SUM(F.Quantity) AS TotalQuantity,\n    SUM(F.TotalAmount) AS TotalSales,\n    AVG(F.TotalAmount) AS AverageOrderValue,\n    MIN(F.TotalAmount) AS MinimumOrderValue,\n    MAX(F.TotalAmount) AS MaximumOrderValue\nFROM gold.FactOrders AS F;",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "SalesDWH",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

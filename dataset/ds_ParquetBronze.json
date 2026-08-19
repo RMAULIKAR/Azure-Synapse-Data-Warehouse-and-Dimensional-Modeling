@@ -1,0 +1,82 @@
+{
+	"name": "ds_ParquetBronze",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_deltalake",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "bronze/sales",
+				"fileSystem": "dwhsynpse"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "OrderID",
+				"type": "INT32"
+			},
+			{
+				"name": "OrderDate",
+				"type": "DATE"
+			},
+			{
+				"name": "CustomerID",
+				"type": "UTF8"
+			},
+			{
+				"name": "CustomerName",
+				"type": "UTF8"
+			},
+			{
+				"name": "CustomerEmail",
+				"type": "UTF8"
+			},
+			{
+				"name": "ProductID",
+				"type": "INT32"
+			},
+			{
+				"name": "ProductName",
+				"type": "UTF8"
+			},
+			{
+				"name": "ProductCategory",
+				"type": "UTF8"
+			},
+			{
+				"name": "RegionID",
+				"type": "INT32"
+			},
+			{
+				"name": "RegionName",
+				"type": "UTF8"
+			},
+			{
+				"name": "Country",
+				"type": "UTF8"
+			},
+			{
+				"name": "Quantity",
+				"type": "INT32"
+			},
+			{
+				"name": "UnitPrice",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "TotalAmount",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			}
+		]
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

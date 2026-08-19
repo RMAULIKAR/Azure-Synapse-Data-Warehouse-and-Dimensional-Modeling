@@ -1,0 +1,21 @@
+{
+	"name": "ds_ParquetSilver",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_deltalake",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "silver/enrSales",
+				"fileSystem": "dwhsynpse"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

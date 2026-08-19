@@ -1,0 +1,67 @@
+{
+	"name": "SilverIngestion",
+	"properties": {
+		"activities": [
+			{
+				"name": "ExecuteTransformLayerDataflow",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "TransfromLayer",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "SilverTable",
+				"type": "Script",
+				"dependsOn": [
+					{
+						"activity": "ExecuteTransformLayerDataflow",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"linkedServiceName": {
+					"referenceName": "ls__SynapseServerless",
+					"type": "LinkedServiceReference"
+				},
+				"typeProperties": {
+					"scripts": [
+						{
+							"type": "Query",
+							"text": "IF NOT EXISTS( SELECT * FROM sys.tables t JOIN sys.schemas s ON t.schema_id = s.schema_id\nWHERE t.name = 'SilverTable' and s.name = 'silver')\n    CREATE EXTERNAL TABLE silver.SilverTable\n    (\n        OrderID           VARCHAR(100),\n        OrderDate         DATETIME2,\n        CustomerID        VARCHAR(100),\n        CustomerName      VARCHAR(100),\n        CustomerEmail     VARCHAR(100),\n        ProductID         VARCHAR(100),\n        ProductName       VARCHAR(100),\n        ProductCategory   VARCHAR(100),\n        RegionID          VARCHAR(100),\n        Country           VARCHAR(100),\n        Quantity          VARCHAR(100),\n        UnitPrice         INT,\n        TotalAmount       INT,\n        Domain            VARCHAR(100)\n    )\n    WITH\n    (\n        LOCATION = 'enrSales',\n        DATA_SOURCE = silver_source,\n        FILE_FORMAT = Parquet\n    );\n"
+						}
+					],
+					"scriptBlockExecutionTimeout": "02:00:00"
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2026-08-13T12:01:23Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}
