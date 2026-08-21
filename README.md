@@ -186,7 +186,7 @@ A business view is created on top of `FactOrders` to provide sales-level metrics
 
 ##  Technologies & Concepts
 
-**Cloud:** Microsoft Azure · Azure Synapse Analytics · Azure Data Lake Storage
+**Cloud:** Microsoft Azure · Azure Synapse Analytics · Azure Data Factory · Azure Data Lake Storage
 
 **Processing:** Synapse Pipelines · Mapping Data Flow · Serverless SQL
 
